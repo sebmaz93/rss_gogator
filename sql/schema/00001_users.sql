@@ -1,4 +1,5 @@
 -- +goose Up
+-- +goose StatementBegin
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users(
@@ -7,6 +8,9 @@ CREATE TABLE users(
     updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
     name TEXT NOT NULL
 );
+-- +goose StatementEnd
 
 -- +goose Down
+-- +goose StatementBegin
 DROP TABLE users;
+-- +goose StatementEnd
