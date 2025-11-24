@@ -8,14 +8,14 @@ import (
 	"net/http"
 )
 
-func (c *Client) FetchFeed(ctx context.Context, feedURL string) (*RSSFeed, error) {
+func (client *Client) FetchFeed(ctx context.Context, feedURL string) (*RSSFeed, error) {
 	req, err := http.NewRequestWithContext(ctx, "GET", feedURL, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	req.Header.Set("user-agent", "gator")
-	res, err := c.httpClient.Do(req)
+	res, err := client.httpClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
