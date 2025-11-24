@@ -16,3 +16,8 @@ TRUNCATE TABLE users CASCADE;
 
 -- name: GetAllUsers :many
 SELECT * FROM users;
+
+-- name: GetUserById :one
+SELECT *
+FROM users
+WHERE users.id = $1;
