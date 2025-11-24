@@ -4,8 +4,10 @@ import (
 	"database/sql"
 	"log"
 	"os"
+	"time"
 
 	_ "github.com/lib/pq"
+	"github.com/sebmaz93/rss_gogator/internal/api"
 	c "github.com/sebmaz93/rss_gogator/internal/cmds"
 	"github.com/sebmaz93/rss_gogator/internal/config"
 	"github.com/sebmaz93/rss_gogator/internal/database"
@@ -19,10 +21,12 @@ func main() {
 
 	db, err := sql.Open("postgres", cfg.DBURL)
 	dbQueries := database.New(db)
+	apiClient := api.NewClient(10 * time.Second)
 
 	appState := &c.State{
-		Cfg: &cfg,
-		DB:  dbQueries,
+		ApiClient: apiClient,
+		Cfg:       &cfg,
+		DB:        dbQueries,
 	}
 
 	commands := c.Commands{

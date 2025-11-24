@@ -3,13 +3,15 @@ package cmds
 import (
 	"errors"
 
+	"github.com/sebmaz93/rss_gogator/internal/api"
 	"github.com/sebmaz93/rss_gogator/internal/config"
 	"github.com/sebmaz93/rss_gogator/internal/database"
 )
 
 type State struct {
-	DB  *database.Queries
-	Cfg *config.Config
+	ApiClient api.Client
+	DB        *database.Queries
+	Cfg       *config.Config
 }
 
 type Command struct {

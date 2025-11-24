@@ -3,8 +3,6 @@ package cmds
 import (
 	"context"
 	"fmt"
-
-	"github.com/sebmaz93/rss_gogator/internal/api"
 )
 
 func CmdFetch(s *State, cmd Command) error {
@@ -13,7 +11,7 @@ func CmdFetch(s *State, cmd Command) error {
 	// }
 
 	url := "https://www.wagslane.dev/index.xml"
-	feed, err := api.FetchFeed(context.Background(), url)
+	feed, err := s.ApiClient.FetchFeed(context.Background(), url)
 	if err != nil {
 		return err
 	}
