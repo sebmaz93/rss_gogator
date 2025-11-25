@@ -7,16 +7,11 @@ import (
 	"github.com/sebmaz93/rss_gogator/internal/database"
 )
 
-func CmdAddFeed(s *State, cmd Command) error {
+func CmdAddFeed(s *State, cmd Command, user database.User) error {
 	if len(cmd.Args) != 2 {
 		return fmt.Errorf("usave: %s <name> <url>", cmd.Name)
 	}
 
-	currUserName := s.Cfg.CurrentUserName
-	user, err := s.DB.GetUser(context.Background(), currUserName)
-	if err != nil {
-		return err
-	}
 	name := cmd.Args[0]
 	url := cmd.Args[1]
 

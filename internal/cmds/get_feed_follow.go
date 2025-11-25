@@ -3,14 +3,12 @@ package cmds
 import (
 	"context"
 	"fmt"
+
+	"github.com/sebmaz93/rss_gogator/internal/database"
 )
 
-func GetFeedFollowsForUser(s *State, cmd Command) error {
-	currUsername := s.Cfg.CurrentUserName
-	user, err := s.DB.GetUser(context.Background(), currUsername)
-	if err != nil {
-		return err
-	}
+func GetFeedFollowsForUser(s *State, cmd Command, user database.User) error {
+
 	feeds, err := s.DB.GetFeedFollowsForUser(context.Background(), user.ID)
 	if err != nil {
 		return nil

@@ -11,6 +11,7 @@ import (
 	c "github.com/sebmaz93/rss_gogator/internal/cmds"
 	"github.com/sebmaz93/rss_gogator/internal/config"
 	"github.com/sebmaz93/rss_gogator/internal/database"
+	"github.com/sebmaz93/rss_gogator/internal/middleware"
 )
 
 func main() {
@@ -37,10 +38,10 @@ func main() {
 	commands.Register("reset", c.CmdReset)
 	commands.Register("users", c.CmdListUsers)
 	commands.Register("agg", c.CmdFetch)
-	commands.Register("addfeed", c.CmdAddFeed)
+	commands.Register("addfeed", middleware.LoggedIn(c.CmdAddFeed))
 	commands.Register("feeds", c.CmdFeeds)
-	commands.Register("follow", c.CmdFollowFeed)
-	commands.Register("following", c.GetFeedFollowsForUser)
+	commands.Register("follow", middleware.LoggedIn(c.CmdFollowFeed))
+	commands.Register("following", middleware.LoggedIn(c.GetFeedFollowsForUser))
 
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: cli <command> [args...]")
