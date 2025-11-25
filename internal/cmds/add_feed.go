@@ -24,10 +24,18 @@ func CmdAddFeed(s *State, cmd Command) error {
 	if err != nil {
 		return err
 	}
-	s.DB.CreateFeed(context.Background(), database.CreateFeedParams{
+	createdFeed, err := s.DB.CreateFeed(context.Background(), database.CreateFeedParams{
 		Name:   name,
 		Url:    url,
 		UserID: user.ID,
+	})
+
+	if err != nil {
+		return err
+	}
+	_, err = s.DB.CreateFeedFollow(context.Background(), database.CreateFeedFollowParams{
+		UserID: user.ID,
+		FeedID: createdFeed.ID,
 	})
 	fmt.Println(feed)
 
