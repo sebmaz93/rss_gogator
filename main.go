@@ -41,7 +41,8 @@ func main() {
 	commands.Register("addfeed", middleware.LoggedIn(c.CmdAddFeed))
 	commands.Register("feeds", c.CmdFeeds)
 	commands.Register("follow", middleware.LoggedIn(c.CmdFollowFeed))
-	commands.Register("following", middleware.LoggedIn(c.GetFeedFollowsForUser))
+	commands.Register("following", middleware.LoggedIn(c.CmdGetFeedFollowsForUser))
+	commands.Register("unfollow", middleware.LoggedIn(c.CmdUnfollowFeed))
 
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: cli <command> [args...]")

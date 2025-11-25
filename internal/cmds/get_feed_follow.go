@@ -7,7 +7,7 @@ import (
 	"github.com/sebmaz93/rss_gogator/internal/database"
 )
 
-func GetFeedFollowsForUser(s *State, cmd Command, user database.User) error {
+func CmdGetFeedFollowsForUser(s *State, cmd Command, user database.User) error {
 
 	feeds, err := s.DB.GetFeedFollowsForUser(context.Background(), user.ID)
 	if err != nil {
